@@ -1,8 +1,9 @@
 from django import forms
+from .models import Characters
 
 class CharactersForm(forms.Form):
     name = forms.CharField(label='名前', max_length=20)
-    gender = forms.ChoiceField(label='性別',
+    gender = forms.ChoiceField(label='性別', widget=forms.RadioSelect,
         choices = (
             ('unknown', '不明'),
             ('man', '男'),
@@ -11,10 +12,12 @@ class CharactersForm(forms.Form):
     )  
     discription = forms.CharField(label="説明", max_length=1000)
 
-    def post(self, name, gender, discription):
-        name = self.cleaned_data[name]
-        gender = self.cleaned_data[gender]
-        discription = self.cleaned_data[discription]
-        
+
+
+class CharactersModelForm(forms.ModelForm):
+
+    class Meta:
+        model = Characters
+        fields = '__all__' 
 
 

@@ -1,3 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+{% for character in characters %}
+{{ character.name }}
+{{ character.gender }}
+{{ character.discription }}
+{% endfor %}
 {% endblock %}

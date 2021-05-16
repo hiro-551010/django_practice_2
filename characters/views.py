@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .forms import CharactersForm
+from .forms import CharactersForm, CharactersModelForm
+from django.views.generic import TemplateView
+from .models import Characters
 
 def index(request):
     return render(request, 'characters/index.html')
@@ -17,5 +19,25 @@ def signup(request):
     }
     return render(request, 'characters/signup.html', context)
 
-def list(request):
-    return render(request, 'characters/list.html')
+def chara(request):
+    form = CharactersModelForm()
+    if request.method == 'POST':
+        form = CharactersModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print('エラーがありました')
+    return render(request, 'characters/form_model.html', context = {'form': form})
+
+        
+
+
+class CharaList(TemplateView):
+    model = Characters
+    template_name = 'characters/list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['characters'] = Characters.objects.all()
+        return context
+
