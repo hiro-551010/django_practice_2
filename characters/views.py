@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .forms import CharactersForm, CharactersModelForm
 from django.views.generic import TemplateView
 from .models import Characters
+from .tables import CharactersTable
+from django_tables2 import SingleTableView
 
 def index(request):
     return render(request, 'characters/index.html')
@@ -41,3 +43,9 @@ class CharaList(TemplateView):
         context['characters'] = Characters.objects.all()
         return context
 
+class CharaTable(SingleTableView):
+    table_class = CharactersTable(Characters)
+    template_name = 'characters/table.html'
+    
+    def get_queryset(self):
+        return Characters.objects.all()
