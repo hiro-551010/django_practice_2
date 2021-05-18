@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CharactersForm, CharactersModelForm
+from .forms import CharactersModelForm
 from django.views.generic import TemplateView
 from .models import Characters
 from .tables import CharactersTable
@@ -8,6 +8,7 @@ from django_tables2 import SingleTableView
 def index(request):
     return render(request, 'characters/index.html')
     
+"""
 def signup(request):
     form = CharactersForm()
     if request.method == 'POST':
@@ -16,15 +17,14 @@ def signup(request):
             print('バリデーション成功')
             print(f"name: {form.cleaned_data['name']}, gender: {form.cleaned_data['gender']}, discription: {form.cleaned_data['discription']}")
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'characters/signup.html', context)
+    return render(request, 'characters/signup.html', context={'form': form})
+"""
 
 def chara(request):
     form = CharactersModelForm()
     if request.method == 'POST':
-        form = CharactersModelForm(request.POST)
+        form = CharactersModelForm(request.POST, request.FILES)
+
         if form.is_valid():
             form.save()
         else:
@@ -44,8 +44,8 @@ class CharaList(TemplateView):
         return context
 
 class CharaTable(SingleTableView):
-    table_class = CharactersTable(Characters)
+    table_class = CharactersTable
     template_name = 'characters/table.html'
-    
+
     def get_queryset(self):
         return Characters.objects.all()
