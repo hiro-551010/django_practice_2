@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load render_table from django_tables2%}
+{% load static %}
 {% block content %}
 <div class="container-fluid">
     <!-- 水平方向の横スクロールバーを加える -->
@@ -10,5 +11,9 @@
         </table>
     </div>
 </div>
+{% for table in tables %}
+<img src="/media/{{table.image}}" alt="">
+
+{% endfor %}
 
 {% endblock %}

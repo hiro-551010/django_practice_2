@@ -49,3 +49,8 @@ class CharaTable(SingleTableView):
 
     def get_queryset(self):
         return Characters.objects.all()
+        
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tables'] = Characters.objects.all()
+        return context

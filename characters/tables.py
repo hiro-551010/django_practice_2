@@ -6,8 +6,12 @@ class CharactersTable(tables.Table):
     gender = tables.Column(verbose_name='性別')
     discription = tables.Column(verbose_name='特徴')
 
+
     class Meta:
         model = Characters
         tamplate_name = 'characters/table.html'
         fields = ('name', 'gender', 'discription', 'image')
+
+from django.utils.html import format_html
+
 
