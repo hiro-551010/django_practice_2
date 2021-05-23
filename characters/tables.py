@@ -12,6 +12,4 @@ class CharactersTable(tables.Table):
         tamplate_name = 'characters/table.html'
         fields = ('name', 'gender', 'discription', 'image')
 
-from django.utils.html import format_html
-
-
+    

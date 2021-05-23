@@ -3,6 +3,14 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid">
+    <form action="{% url 'characters:table' %}" method="GET">
+        <p>名前で検索: <input type="text" name="name"></p>
+        <!-- <p>性別で検索: <input type="text" name="gender"></p> -->
+        <p><input type="submit" value="検索"></p>
+    </form>
+
+
+
     <!-- 水平方向の横スクロールバーを加える -->
     <div class="table-responsive col-auto">
         <!-- 縞ストライプで見やすくする -->

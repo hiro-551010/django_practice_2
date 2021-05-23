@@ -1,5 +1,6 @@
 from django.db import models
 
+
 GENDER = (
     ('', '性別を選んでください'),
     ('unknown', '不明'),
@@ -15,3 +16,4 @@ class Characters(models.Model):
 
     def __str__(self):
         return self.image.url
+

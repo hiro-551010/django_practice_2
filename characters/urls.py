@@ -15,5 +15,3 @@ urlpatterns = [
     path('table/', views.CharaTable.as_view(), name='table'),
 ]
 
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
