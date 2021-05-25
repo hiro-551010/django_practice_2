@@ -4,8 +4,10 @@ from django.views.generic import TemplateView, DetailView
 from .models import Characters
 from .tables import CharactersTable
 from django_tables2 import SingleTableView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+@login_required
 def index(request):
     return render(request, 'characters/index.html')
     
@@ -51,12 +53,16 @@ class CharaTable(SingleTableView):
 
     def get_queryset(self):
         query = super().get_queryset()
-        query = Characters.objects.all()
         character_name = self.request.GET.get('name')
-        # character_gender = self.request.GET.get('gender')
+        character_gender = self.request.GET.get('gender')
         if character_name:
             query = query.filter(name=character_name)
-            # query = query.filter(gender=character_gender)
+            print(query, 'name')
+            return query
+        if character_gender:
+            query = query.filter(gender=character_gender)
+            print(query, 'gender')
+            return query
         return query
 
     def get_context_data(self, *args, **kwargs):

@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <form action="{% url 'characters:table' %}" method="GET">
         <p>名前で検索: <input type="text" name="name"></p>
-        <!-- <p>性別で検索: <input type="text" name="gender"></p> -->
+        <p>性別で検索: <input type="text" name="gender"></p>
         <p><input type="submit" value="検索"></p>
     </form>
 
@@ -15,7 +15,9 @@
     <div class="table-responsive col-auto">
         <!-- 縞ストライプで見やすくする -->
         <table class="table table-striped">
-            {% render_table table %}
+            {% if table %}
+                {% render_table table %}
+            {% endif %}
         </table>
     </div>
 </div>
