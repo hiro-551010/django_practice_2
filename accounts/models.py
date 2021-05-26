@@ -53,3 +53,16 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, unique=True, on_delete=models.CASCADE, primary_key=True)
+    username = models.CharField(default="匿名ユーザー",max_length=30,)
+    zipcode = models.CharField(default="郵便番号", max_length=8)
+    prefecture = models.CharField(default="都道府県", max_length=5)
+    city = models.CharField(default="市町村", max_length=100)
+    address = models.CharField(default="建物名", max_length=200)
+
+    class Meta:
+        db_table = 'profile'
+
+    def __str__(self):
+        return self.username

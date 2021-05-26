@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {% if form %}
+        {{ request.user.profile.username }}
+        {{ request.user.profile.zipcode }}
+        {{ request.user.profile.prefecture }}
+        {{ request.user.profile.city }}
+        {{ request.user.profile.address }}
+    {% else %}
+        {{ form.as_p }}
+        <input type="submit" value="保存">
+    {% endif %}
+    
+</form>
+{% endblock %}

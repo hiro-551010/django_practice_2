@@ -23,6 +23,7 @@ def signup(request):
     return render(request, 'characters/signup.html', context={'form': form})
 """
 
+@login_required
 def chara(request):
     form = CharactersModelForm()
     if request.method == 'POST':
@@ -37,7 +38,7 @@ def chara(request):
         
 
 
-class CharaList(TemplateView):
+class CharaList(LoginRequiredMixin, TemplateView):
     model = Characters
     template_name = 'characters/list.html'
 
@@ -46,7 +47,7 @@ class CharaList(TemplateView):
         context['characters'] = Characters.objects.all()
         return context
 
-class CharaTable(SingleTableView):
+class CharaTable(LoginRequiredMixin, SingleTableView):
     table_class = CharactersTable
     template_name = 'characters/table.html'
     queryset = Characters.objects.all()
@@ -63,6 +64,7 @@ class CharaTable(SingleTableView):
             query = query.filter(gender=character_gender)
             print(query, 'gender')
             return query
+        return query
 
 
     def get_context_data(self, *args, **kwargs):

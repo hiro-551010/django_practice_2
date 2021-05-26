@@ -4,4 +4,11 @@
       <li><a class="dropdown-item" href="{% url 'characters:chara' %}">キャラクター登録</a></li>
       <li><a class="dropdown-item" href="{% url 'characters:table'  %}">キャラクター一覧</a></li>
     </ul>
+    <ul>
+      {% if user.is_authenticated %}
+      <li>{{request.user|truncatechars_html:10}}さんがログイン中です</li>
+      <li><a href="{% url 'accounts:mypage' %}">マイページ</a></li>
+      <li><a href="{% url 'accounts:logout' %}">ログアウト</a></li>
+      {% endif %}
+    </ul>
 </li>
