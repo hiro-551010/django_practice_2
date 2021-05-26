@@ -3,9 +3,9 @@ from django.db import models
 
 GENDER = (
     ('', '性別を選んでください'),
-    ('unknown', '不明'),
-    ('man', '男'),
-    ('woman', '女'),
+    ('unknown', 'unknown'),
+    ('man', 'man'),
+    ('woman', 'woman'),
 )
 
 class Characters(models.Model):
@@ -14,6 +14,5 @@ class Characters(models.Model):
     discription = models.CharField('特徴', max_length=1000)
     image = models.ImageField('写真', upload_to='media/', null=True)
 
-    def __str__(self):
-        return self.image.url
+
 

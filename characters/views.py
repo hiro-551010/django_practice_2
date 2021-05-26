@@ -63,7 +63,7 @@ class CharaTable(SingleTableView):
             query = query.filter(gender=character_gender)
             print(query, 'gender')
             return query
-        return query
+
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
